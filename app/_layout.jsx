@@ -1,65 +1,90 @@
 import { Stack } from 'expo-router';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-const HeaderTitle = () => {
+const Header = (props) => {
+
+  const {options, menuItems} = props;
+  console.log(options.headerTitle);
+  console.log(menuItems);
+
   return (
-    <View style={styles.headerWrapper}>
-      <View style={styles.headerStreak}>
-        <Text style={styles.headerWeek}>WEEK      10</Text>
-        <Image
-          style={styles.headerBolt}
-          source={require('../assets/Bolt.png')}
-        />
+    <View style={headerStyles.wrapper}>
+      <View style={[headerStyles.row, {justifyContent: 'space-between', width: '100%'}]}>
+        <View style={headerStyles.streak}>
+          <Text style={headerStyles.week}>WEEK    10</Text>
+          <Image
+            style={headerStyles.bolt}
+            source={require('../assets/Bolt.png')}
+          />
+        </View>
+        <View style={[headerStyles.row, {gap: 10}]}>
+          {menuItems.map((itemObj) => (
+            <Text key={itemObj.name} 
+            style={itemObj.title == options.headerTitle ? [headerStyles.title, {color: "#6363FF"}] : headerStyles.title}>
+              {itemObj.title}
+            </Text>
+          ))}
+        </View>
       </View>
-      <Text style={styles.headerTitle}>Chest, Shoulders and Back</Text>
     </View>
   );
 }
 
-const RootLayout = () => {
-  return (
-    <Stack>
-      <Stack.Screen name="index" options={{
-        headerStyle: {
-          backgroundColor: "#0D0D46",
-        },
-        contentStyle: {
-          borderTopColor: "rgba(99, 99, 255, 0.3)",
-          borderTopWidth: 1,
-          backgroundColor: "#1A1A1A",
-          color: "#BCC2E1"
-        },
-        headerTitle: (props) => <HeaderTitle {...props} />
-      }} />
-    </Stack>
-  )
-}
-
-const styles = StyleSheet.create({
-  headerWrapper: {
+const headerStyles = StyleSheet.create({
+  wrapper: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: "94%"
+    alignItems: "flex-end",
+    width: "100%",
+    height: 100,
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    backgroundColor: "#0D0D46",
+    borderBottomColor: "rgba(99, 99, 255, 0.3)",
+    borderBottomWidth: 1,
   },
-  headerTitle: {
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  title: {
     color: "rgba(99, 99, 255, 0.6)",
     textTransform: "uppercase",  
   },
-  headerWeek: {
+  week: {
     color: "#6363FF",    
     fontWeight: "900",
     fontStyle: "italic",
-    letterSpacing: -2.2
+    letterSpacing: -2.2,
+    fontSize: 18
   },
-  headerBolt: {
+  bolt: {
     width: 7,
     height: 12
   },
-  headerStreak: {
+  streak: {
     flexDirection: "row",
     alignItems: "center",
     gap: 1
   }
 });
+
+const RootLayout = () => {
+
+  const menuItems = [
+    {name: "index", title: "Routines"}, 
+    {name: "workouts", title: "Workouts"}, 
+    {name: "exercises", title: "Exercises"}
+  ];
+
+  return (
+    <Stack>
+      {menuItems.map((itemObj) => (
+        <Stack.Screen name={itemObj.name} options={{
+          headerTitle: `${itemObj.title}`, header: (props) => <Header menuItems={menuItems} {...props} />
+        }} />
+      ))}
+    </Stack>
+  )
+}
 
 export default RootLayout;
