@@ -1,11 +1,9 @@
-import { Stack } from 'expo-router';
+import { Stack, Link } from 'expo-router';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 const Header = (props) => {
 
   const {options, menuItems} = props;
-  console.log(options.headerTitle);
-  console.log(menuItems);
 
   return (
     <View style={headerStyles.wrapper}>
@@ -19,10 +17,10 @@ const Header = (props) => {
         </View>
         <View style={[headerStyles.row, {gap: 10}]}>
           {menuItems.map((itemObj) => (
-            <Text key={itemObj.name} 
-            style={itemObj.title == options.headerTitle ? [headerStyles.title, {color: "#6363FF"}] : headerStyles.title}>
+            <Link key={itemObj.name} href={itemObj.name === "index" ? "/" : `/${itemObj.name}`}
+            style={itemObj.title === options.headerTitle ? [headerStyles.title, {color: "#6363FF"}] : headerStyles.title}>
               {itemObj.title}
-            </Text>
+            </Link>
           ))}
         </View>
       </View>
@@ -79,8 +77,12 @@ const RootLayout = () => {
   return (
     <Stack>
       {menuItems.map((itemObj) => (
-        <Stack.Screen name={itemObj.name} options={{
-          headerTitle: `${itemObj.title}`, header: (props) => <Header menuItems={menuItems} {...props} />
+        <Stack.Screen key={itemObj.name} name={itemObj.name} options={{
+          headerTitle: `${itemObj.title}`, 
+          header: (props) => <Header menuItems={menuItems} {...props} />,
+          contentStyle: {
+            backgroundColor: "#1A1A1A",
+          }
         }} />
       ))}
     </Stack>
