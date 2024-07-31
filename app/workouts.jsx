@@ -3,15 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function Workouts() {
   return (
     <View style={styles.container}>
-      <Text>Workouts</Text>
+      <Text style={styles.text}>Workouts</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        color: "#BCC2E1"
+    }
 });

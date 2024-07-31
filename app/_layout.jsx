@@ -15,7 +15,7 @@ const Header = (props) => {
             source={require('../assets/Bolt.png')}
           />
         </View>
-        <View style={[headerStyles.row, {gap: 10}]}>
+        <View style={headerStyles.row}>
           {menuItems.map((itemObj) => (
             <Link key={itemObj.name} href={itemObj.name === "index" ? "/" : `/${itemObj.name}`}
             style={itemObj.title === options.headerTitle ? [headerStyles.title, {color: "#6363FF"}] : headerStyles.title}>
@@ -34,8 +34,7 @@ const headerStyles = StyleSheet.create({
     alignItems: "flex-end",
     width: "100%",
     height: 100,
-    paddingHorizontal: 20,
-    paddingBottom: 10,
+    paddingHorizontal: 15,
     backgroundColor: "#0D0D46",
     borderBottomColor: "rgba(99, 99, 255, 0.3)",
     borderBottomWidth: 1,
@@ -47,6 +46,8 @@ const headerStyles = StyleSheet.create({
   title: {
     color: "rgba(99, 99, 255, 0.6)",
     textTransform: "uppercase",  
+    paddingVertical: 10,
+    paddingHorizontal: 5
   },
   week: {
     color: "#6363FF",    
@@ -75,7 +76,7 @@ const RootLayout = () => {
   ];
 
   return (
-    <Stack>
+    <Stack screenOptions={{ animation: 'none' }}>
       {menuItems.map((itemObj) => (
         <Stack.Screen key={itemObj.name} name={itemObj.name} options={{
           headerTitle: `${itemObj.title}`, 
