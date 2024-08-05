@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 
 export default function App() {
 
@@ -32,14 +33,14 @@ export default function App() {
           </View>
           
           <View style={routineStyles.container}>
-            {routines.map((routine)=>        
-              <View>
+            {routines.map((routine, index)=>        
+              <Pressable key={`routine-${index}`} onPress={()=>router.push(`routines/${index}`)}>
                 <Text style={routineStyles.title}>{routine.title}</Text>
                 <View style={routineStyles.infoWrapper}>
                   <Text style={routineStyles.info}>{routine.days} Days</Text>
                   <Text style={routineStyles.info}>{routine.exercises} Exercises</Text>
                 </View>            
-              </View>    
+              </Pressable>    
             )}        
           </View>  
 
