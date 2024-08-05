@@ -8,7 +8,7 @@ const TabsLayout = () => {
         <Tabs.Screen name="index" options={{title: "Routines", header: (props) => <Header {...props} />}} />
         <Tabs.Screen name="workouts/index" options={{title: "Workouts", header: (props) => <Header {...props} />}} />
         <Tabs.Screen name="exercises/index" options={{title: "Exercises", header: (props) => <Header {...props} />}} />
-        <Tabs.Screen name="routines/[id]" options={{header: (props) => <Header {...props} />}} />
+        <Tabs.Screen name="routines/[id]" options={{backTitle: "Routines", header: (props) => <Header {...props} />}} />
     </Tabs>
   );
 }

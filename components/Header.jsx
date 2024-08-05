@@ -1,19 +1,29 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { router } from 'expo-router';
 
-const Header = (props) => {
-
-  // console.log(props);
+const Header = ({options}) => {
 
   return (
     <View style={headerStyles.container}>
       <View style={headerStyles.wrapper}>
         <View style={headerStyles.row}>
-          <Text style={headerStyles.text}>ONE</Text>
+
+          {
+            options.backTitle 
+            ? (<Pressable style={headerStyles.backBtn} onPress={()=>router.back()}>
+                <Ionicons name="chevron-back-sharp" style={headerStyles.backArrow} size={15} color="#6363FF" />
+                <Text style={headerStyles.backText}>{options.backTitle}</Text>
+              </Pressable>) 
+            : (<Text style={headerStyles.text}>ONE</Text>)
+          }
+
           <View style={headerStyles.streak}>
             <Text style={headerStyles.text}>WEEK    10</Text>
-            <Image style={headerStyles.bolt} source={require('../assets/Bolt.png')} />
+            <MaterialIcons name="bolt" style={headerStyles.bolt} size={15} color="#6363FF" />
           </View>
+
         </View>
       </View>
     </View>
@@ -46,16 +56,25 @@ const headerStyles = StyleSheet.create({
     fontWeight: "900",
     fontStyle: "italic",
     letterSpacing: -2.2,
-    fontSize: 16
+    fontSize: 16,
+    textTransform: "uppercase"
   },
-  bolt: {
-    width: 7,
-    height: 12
+  backText: {
+    color: "#6363FF",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  backBtn: {
+    display: "flex",
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  bolt:{
+    marginLeft: -1
   },
   streak: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 1
+    alignItems: "center",    
   }
 });
 
