@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
 export default function Exercises() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Exercises</Text>
-    </View>
+    <>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.container}>
+        <Text style={styles.text}>Exercises</Text>
+      </View>
+    </>
   );
 }
 

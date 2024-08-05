@@ -3,35 +3,33 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 const Header = () => {
   return (
-    <View style={headerStyles.wrapper}>
-      <View style={headerStyles.row}>
-        <Text style={headerStyles.text}>ONE</Text>
-        <View style={headerStyles.streak}>
-          <Text style={headerStyles.text}>WEEK    10</Text>
-          <Image style={headerStyles.bolt} source={require('../assets/Bolt.png')} />
-        </View>        
+    <View style={headerStyles.container}>
+      <View style={headerStyles.wrapper}>
+        <View style={headerStyles.row}>
+          <Text style={headerStyles.text}>ONE</Text>
+          <View style={headerStyles.streak}>
+            <Text style={headerStyles.text}>WEEK    10</Text>
+            <Image style={headerStyles.bolt} source={require('../assets/Bolt.png')} />
+          </View>        
+        </View>
       </View>
-      <View style={headerStyles.underline}></View>
     </View>
   );
 }
 
 const headerStyles = StyleSheet.create({
+  container: {
+    backgroundColor: "#0D0D0D",    
+  },
   wrapper: {
     flexDirection: "row",
     alignItems: "flex-end",
-    flexWrap: "wrap",
-    width: "100%",
+    width: "90%",
+    marginHorizontal: "auto",
     paddingTop: 60,
-    paddingHorizontal: 15,
-    backgroundColor: "#0D0D0D",
-  },
-  underline: {
-    flex: "0 0 100%",
-    height: 1,
-    width: "100%",
-    backgroundColor: "#6363FF",
-    marginTop: 5
+    paddingBottom: 5,
+    borderBottomColor: "#6363FF",
+    borderBottomWidth: 1
   },
   row: {
     flexDirection: "row",
@@ -60,9 +58,9 @@ const headerStyles = StyleSheet.create({
 const RootLayout = () => {
 
   return (    
-    <Stack screenOptions={{ animation: 'none', contentStyle: { backgroundColor: '#0D0D0D' } }}>
-      <Stack.Screen name="(tabs)" options={{header: (props) => <Header {...props} />}} />
-    </Stack>    
+    <Stack screenOptions={{ animation: 'none', contentStyle: { backgroundColor: '#0D0D0D', paddingTop: 30 } }}>
+      <Stack.Screen name="(tabs)" options={{ header: (props) => <Header {...props} />}} />
+    </Stack>        
   )
 }
 

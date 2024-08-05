@@ -31,9 +31,9 @@ const tabOptions = (iconName, label = "") => {
 const TabsLayout = () => {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "#BCC2E1", tabBarInactiveTintColor: "#646794" }}>
-        <Tabs.Screen name="index" options={tabOptions("calendar-outline", "Routines")} />
-        <Tabs.Screen name="workouts" options={tabOptions("list-outline")} />
-        <Tabs.Screen name="exercises" options={tabOptions("barbell-outline")} />
+        <Tabs.Screen name="index" options={tabOptions("calendar", "Routines")} />
+        <Tabs.Screen name="workouts" options={tabOptions("list-sharp")} />
+        <Tabs.Screen name="exercises" options={tabOptions("barbell-sharp")} />
     </Tabs>
   );
 }
