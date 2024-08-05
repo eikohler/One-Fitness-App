@@ -31,13 +31,17 @@ export default function App() {
             <Ionicons name="ellipsis-horizontal" size={40} color={"#BCC2E1"} />
           </View>
           
-          {routines.map((routine)=>{
-            (
-              <View style={routineStyles.title}>
-                {routine.title}
-              </View>
-            )
-          })}          
+          <View style={routineStyles.container}>
+            {routines.map((routine)=>        
+              <View>
+                <Text style={routineStyles.title}>{routine.title}</Text>
+                <View style={routineStyles.infoWrapper}>
+                  <Text style={routineStyles.info}>{routine.days} Days</Text>
+                  <Text style={routineStyles.info}>{routine.exercises} Exercises</Text>
+                </View>            
+              </View>    
+            )}        
+          </View>  
         </View>
       </View>
     </>
@@ -57,21 +61,42 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    flexDirection: "row"
+    flexDirection: "row",
+    marginBottom: 30
   },
   title: {
     color: "#BCC2E1",
     fontSize: 32,
     fontWeight: "700",
-    letterSpacing: 2
+    letterSpacing: 1.5,    
   }
 });
 
 const routineStyles = StyleSheet.create({
+  container: {
+    display: "flex",
+    gap: 35
+  },
+  infoWrapper: {
+    backgroundColor: "#2A2A2D",
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 8,    
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  info: {
+    color: "#BCC2E1",
+    fontSize: 16,
+    letterSpacing: 1.2,
+    fontWeight: "500"
+  },
   title: {
     color: "#BCC2E1",
     fontSize: 16,
     fontWeight: "700",
-    letterSpacing: 2
+    letterSpacing: 1,
+    marginBottom: 8
   }
 });
