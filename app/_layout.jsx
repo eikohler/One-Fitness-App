@@ -1,10 +1,10 @@
-import { Stack, Link } from 'expo-router';
+import { Stack } from 'expo-router';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 const Header = () => {
   return (
     <View style={headerStyles.wrapper}>
-      <View style={[headerStyles.row, {justifyContent: 'space-between', width: '100%'}]}>
+      <View style={headerStyles.row}>
         <Text style={headerStyles.text}>ONE</Text>
         <View style={headerStyles.streak}>
           <Text style={headerStyles.text}>WEEK    10</Text>
@@ -22,7 +22,7 @@ const headerStyles = StyleSheet.create({
     alignItems: "flex-end",
     flexWrap: "wrap",
     width: "100%",
-    paddingTop: 50,
+    paddingTop: 60,
     paddingHorizontal: 15,
     backgroundColor: "#0D0D0D",
   },
@@ -36,18 +36,15 @@ const headerStyles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  title: {
-    color: "#BCC2E1",
-    textTransform: "uppercase",  
-    paddingVertical: 10,
-    paddingHorizontal: 5
+    justifyContent: 'space-between', 
+    width: '100%'
   },
   text: {
     color: "#6363FF",    
     fontWeight: "900",
     fontStyle: "italic",
     letterSpacing: -2.2,    
+    fontSize: 16
   },
   bolt: {
     width: 7,
@@ -62,10 +59,10 @@ const headerStyles = StyleSheet.create({
 
 const RootLayout = () => {
 
-  return (
-    <Stack screenOptions={{ animation: 'none' }}>
+  return (    
+    <Stack screenOptions={{ animation: 'none', contentStyle: { backgroundColor: '#0D0D0D' } }}>
       <Stack.Screen name="(tabs)" options={{header: (props) => <Header {...props} />}} />
-    </Stack>
+    </Stack>    
   )
 }
 
