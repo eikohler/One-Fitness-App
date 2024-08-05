@@ -42,6 +42,12 @@ export default function App() {
               </View>    
             )}        
           </View>  
+
+          <View style={buttonStyles.container}>
+            <View style={buttonStyles.wrapper}>
+              <Text style={buttonStyles.text}>Add Routine</Text>
+            </View>
+          </View>
         </View>
       </View>
     </>
@@ -98,5 +104,27 @@ const routineStyles = StyleSheet.create({
     fontWeight: "700",
     letterSpacing: 1,
     marginBottom: 8
+  }
+});
+
+const buttonStyles = StyleSheet.create({
+  container: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 40
+  },
+  wrapper: {
+    padding: 10,
+    borderRadius: 6,
+    borderColor: "#BCC2E1",
+    borderWidth: 1,
+    minWidth: 200,
+  },
+  text: {
+    color: "#BCC2E1",
+    fontSize: 16,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    textAlign: "center"
   }
 });
