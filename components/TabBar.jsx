@@ -1,15 +1,13 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { colors } from '../styles/global';
 
 const TabBar = ({ state, descriptors, navigation }) => {
 
-    const focusColor = '#BCC2E1';
-    const idleColor = '#646794';
-
     const icons = {
-        'index': (props) => <MaterialCommunityIcons name="calendar-text" size={30} color={idleColor} {...props} />,
-        'workouts/index': (props) => <MaterialCommunityIcons name="clipboard-list" size={30} color={idleColor} {...props} />,
-        'exercises/index': (props) => <MaterialCommunityIcons name="weight-lifter" size={30} color={idleColor} {...props} />
+        'index': (props) => <MaterialCommunityIcons name="calendar-text" size={30} color={colors.secondaryText} {...props} />,
+        'workouts/index': (props) => <MaterialCommunityIcons name="clipboard-list" size={30} color={colors.secondaryText} {...props} />,
+        'exercises/index': (props) => <MaterialCommunityIcons name="weight-lifter" size={30} color={colors.secondaryText} {...props} />
     }
 
     return (
@@ -58,8 +56,8 @@ const TabBar = ({ state, descriptors, navigation }) => {
                             style={tabStyles.tab}
                             key={`tab-${index}`}
                         >
-                            {icons[route.name]({ color: isFocused ? focusColor : idleColor })}
-                            <Text style={[tabStyles.label, { color: isFocused ? focusColor : idleColor }]}>
+                            {icons[route.name]({ color: isFocused ? colors.primaryText : colors.secondaryText })}
+                            <Text style={[tabStyles.label, { color: isFocused ? colors.primaryText : colors.secondaryText }]}>
                                 {label}
                             </Text>
                         </TouchableOpacity>
@@ -72,10 +70,10 @@ const TabBar = ({ state, descriptors, navigation }) => {
 
 const tabStyles = StyleSheet.create({
     container: {
-        backgroundColor: "#0D0D0D",
+        backgroundColor: colors.mainBG,
     },
     wrapper: {
-        backgroundColor: "#0D0D46",
+        backgroundColor: colors.tabBG,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         display: "flex",
@@ -84,7 +82,7 @@ const tabStyles = StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal: 20,
         paddingBottom: 40,
-        paddingTop: 20,
+        paddingTop: 20
     },
     tab: {
         flex: 1,

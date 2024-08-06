@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
+import { colors } from '../styles/global';
 
 const Header = ({options}) => {
 
@@ -12,16 +13,16 @@ const Header = ({options}) => {
 
           {
             options.backTitle 
-            ? (<Pressable style={headerStyles.backBtn} onPress={()=>router.back()}>
+            ? (<Pressable style={headerStyles.textIconWrapper} onPress={()=>router.back()}>
                 <Ionicons name="chevron-back-sharp" style={headerStyles.backArrow} size={15} color="#6363FF" />
                 <Text style={headerStyles.backText}>{options.backTitle}</Text>
               </Pressable>) 
             : (<Text style={headerStyles.text}>ONE</Text>)
           }
 
-          <View style={headerStyles.streak}>
+          <View style={headerStyles.textIconWrapper}>
             <Text style={headerStyles.text}>WEEK    10</Text>
-            <MaterialIcons name="bolt" style={headerStyles.bolt} size={15} color="#6363FF" />
+            <MaterialIcons name="bolt" style={{marginLeft: -1}} size={15} color="#6363FF" />
           </View>
 
         </View>
@@ -32,17 +33,15 @@ const Header = ({options}) => {
 
 const headerStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#0D0D0D",
+    backgroundColor: colors.mainBG,
     paddingBottom: 20
   },
   wrapper: {
-    flexDirection: "row",
-    alignItems: "flex-end",
     width: "90%",
     marginHorizontal: "auto",
     paddingTop: 60,
-    paddingBottom: 5,
-    borderBottomColor: "#6363FF",
+    paddingBottom: 10,
+    borderBottomColor: colors.headerText,
     borderBottomWidth: 1
   },
   row: {
@@ -52,7 +51,7 @@ const headerStyles = StyleSheet.create({
     width: '100%'
   },
   text: {
-    color: "#6363FF",
+    color: colors.headerText,
     fontWeight: "900",
     fontStyle: "italic",
     letterSpacing: -2.2,
@@ -60,22 +59,14 @@ const headerStyles = StyleSheet.create({
     textTransform: "uppercase"
   },
   backText: {
-    color: "#6363FF",
+    color: colors.headerText,
     fontWeight: "700",
     fontSize: 16,
   },
-  backBtn: {
-    display: "flex",
+  textIconWrapper: {
     flexDirection: 'row',
     alignItems: 'center'
   },
-  bolt:{
-    marginLeft: -1
-  },
-  streak: {
-    flexDirection: "row",
-    alignItems: "center",    
-  }
 });
 
 export default Header;
