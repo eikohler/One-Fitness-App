@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const PageHeading = ({title, list}) => {
+const PageHeading = ({title, list = []}: {title: string, list?: string[]}) => {
 
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ const PageHeading = ({title, list}) => {
             </View>
             <Ionicons name="ellipsis-horizontal" size={40} color={colors.primaryText} />
         </View>
-        {list !== undefined && list.map((text, index) =>
+        {list.map((text, index) =>
             <Text style={styles.list} key={`headingList-${index}`}>{text}</Text>
         )}
     </View>

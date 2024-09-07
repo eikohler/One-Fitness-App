@@ -4,15 +4,10 @@ import Button from '@/components/Button';
 import SlimList from "@/components/SlimList";
 import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
-import { initDB, getRoutines, addRoutine } from '@/utilities/db-functions';
-import { ListData } from '@/constants/Interfaces';
+import { initDB, getRoutines, addRoutine, deleteRoutine } from '@/utilities/db-functions';
+import { ListData, Routine } from '@/constants/Interfaces';
 import { Href } from 'expo-router';
-
-interface Routine{
-  routine_id: number
-  title: string
-  last_note: string
-}
+import PageHeading from '@/components/PageHeading';
 
 const RoutinesList = () => {
   const db = useSQLiteContext();
@@ -21,8 +16,7 @@ const RoutinesList = () => {
 
   const [listData, setListData] = useState<ListData[]>([]);
 
-  useEffect(()=>{
-    // addRoutine({title: "Workout Routine 1.0", last_note: "Good workout week"});
+  useEffect(()=>{    
     getRoutines(db)
       .then((res)=>{ if(res) setRoutines(res); })
       .catch((err)=>console.log(err));
@@ -32,7 +26,7 @@ const RoutinesList = () => {
     let newListData:ListData[] = [];
     
     routines.map((obj)=>{      
-      newListData.push({title: obj.title, info: [], url: `/routines/${obj.routine_id}` as Href });
+      newListData.push({title: obj.title, info: ["ID:"+obj.routine_id, obj.last_note], url: `/routines/${obj.routine_id}` as Href });
     });
 
     setListData(newListData);
@@ -59,6 +53,8 @@ export default function Routines() {
       <View style={mainStyles.container}>
         <StatusBar barStyle="light-content" />
         <View style={mainStyles.wrapper}>
+
+          <PageHeading title={'Routines'} />
 
           <RoutinesList />
 
