@@ -1,8 +1,12 @@
 import { View, StatusBar, Text } from 'react-native';
-import { mainStyles } from '@/constants/GlobalStyles';
-import Button from '../../components/Button';
-import { SQLiteProvider, useSQLiteContext, type SQLiteDatabase } from 'expo-sqlite';
+import { mainStyles } from '@/constants/Styles';
+import Button from '@/components/Button';
+import SlimList from "@/components/SlimList";
+import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
+import { initDB, getRoutines, addRoutine } from '@/utilities/db-functions';
+import { ListData } from '@/constants/Interfaces';
+import { Href } from 'expo-router';
 
 interface Routine{
   routine_id: number
@@ -10,50 +14,30 @@ interface Routine{
   last_note: string
 }
 
-const initDB = async (db: SQLiteDatabase) => {
-  try {
-    await db.execAsync(`
-      PRAGMA journal_mode = WAL;
-      CREATE TABLE IF NOT EXISTS routines (
-        routine_id INTEGER PRIMARY KEY,
-        title VARCHAR(100) NOT NULL,
-        last_note VARCHAR(100)
-      );  
-    `)
-    console.log("DB initialized");
-  } catch (err) {
-    console.log("Error while initializing DB: ", err);
-  }
-}
-
-const Content = () => {
+const RoutinesList = () => {
   const db = useSQLiteContext();
 
   const [routines, setRoutines] = useState<Routine[]>([]);
-  
-  const getRoutines = async () => {
-    try {
-      const allRows:Routine[] = await db.getAllAsync('SELECT * FROM routines');
-      setRoutines(allRows);
-    } catch(err) {
-      console.log("Error while loading routines: ", err);
-    }
-  }
 
-  const addRoutine = async (newRoutine: {title: string; last_note: string}) => {
-    try {
-      const query = await db.prepareAsync(`INSERT INTO routines (title, last_note) VALUES (?, ?)`);
-      await query.executeAsync(newRoutine.title, newRoutine.last_note);
-      await getRoutines();
-    } catch (err) {
-      console.log("Error while adding routine: ", err);
-    }
-  }
+  const [listData, setListData] = useState<ListData[]>([]);
 
   useEffect(()=>{
     // addRoutine({title: "Workout Routine 1.0", last_note: "Good workout week"});
-    getRoutines();
+    getRoutines(db)
+      .then((res)=>{ if(res) setRoutines(res); })
+      .catch((err)=>console.log(err));
   }, []);
+
+  useEffect(()=>{
+    let newListData:ListData[] = [];
+    
+    routines.map((obj)=>{      
+      newListData.push({title: obj.title, info: [], url: `/routines/${obj.routine_id}` as Href });
+    });
+
+    setListData(newListData);
+
+  }, [routines]);
 
   return (
     <View>
@@ -61,13 +45,7 @@ const Content = () => {
         <Text style={{color: "#fff"}}>No Routines to Load</Text>
       ) : (
         <>
-          {routines.map((obj, index) => {
-            return (
-              <Text style={{color: "#fff"}} key={`routine-${index}`}>
-                {obj.routine_id} - {obj.title} - {obj.last_note}
-              </Text>
-            )
-          })}
+          <SlimList data={listData} />
         </>
       )}
     </View>
@@ -75,15 +53,16 @@ const Content = () => {
 }
 
 export default function Routines() {
+  
   return (
     <SQLiteProvider databaseName="fitness.db" onInit={initDB}>
       <View style={mainStyles.container}>
         <StatusBar barStyle="light-content" />
         <View style={mainStyles.wrapper}>
 
-          <Content />
+          <RoutinesList />
 
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
             <Button text={'Add Routine'} />
           </View>
 

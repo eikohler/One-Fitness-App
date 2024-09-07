@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import { View, StatusBar, Text } from 'react-native';
-import { mainStyles } from '@/constants/GlobalStyles';
+import { mainStyles } from '@/constants/Styles';
 
 const WorkoutPage = () => {
   const { id } = useLocalSearchParams();

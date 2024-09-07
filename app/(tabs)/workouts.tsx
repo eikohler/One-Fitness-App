@@ -1,5 +1,5 @@
 import { View, StatusBar } from 'react-native';
-import { mainStyles } from '@/constants/GlobalStyles';
+import { mainStyles } from '@/constants/Styles';
 import Button from '../../components/Button';
 
 export default function Workouts() {
