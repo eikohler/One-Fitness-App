@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 8,
     display: "flex",
+    flexWrap: "wrap",
+    gap: 10,
     flexDirection: "row",
     justifyContent: "space-between"
   },

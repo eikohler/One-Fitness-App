@@ -17,6 +17,11 @@ const RoutinesList = () => {
   const [listData, setListData] = useState<ListData[]>([]);
 
   useEffect(()=>{    
+
+    // addRoutine(db, { title: "Workout Routine 1.0", last_note: "Need better form" });
+
+    // deleteRoutine(db, "1");
+
     getRoutines(db)
       .then((res)=>{ if(res) setRoutines(res); })
       .catch((err)=>console.log(err));
@@ -34,15 +39,13 @@ const RoutinesList = () => {
   }, [routines]);
 
   return (
-    <View>
+    <>
       {routines.length === 0 ? (
         <Text style={{color: "#fff"}}>No Routines to Load</Text>
       ) : (
-        <>
-          <SlimList data={listData} />
-        </>
+        <SlimList data={listData} />
       )}
-    </View>
+    </>
   );
 }
 
