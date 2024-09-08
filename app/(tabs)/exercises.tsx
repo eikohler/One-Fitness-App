@@ -62,7 +62,7 @@ export default function Exercises() {
           <ExercisesList />
 
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <Button text={'Add Exercise'} />
+            <Button text={'Add Exercise'} url={"/add-routine"} />
           </View>
 
         </View>

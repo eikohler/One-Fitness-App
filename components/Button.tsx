@@ -1,18 +1,13 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Pressable } from 'react-native';
 import { colors } from '@/constants/Colors';
+import { Href, router } from 'expo-router';
 
-interface Props{
-  text: string
-}
-
-const Button = (props: Props) => {
-
-  const { text } = props;
+const Button = ({text, url}: {text: string, url: Href}) => {
 
   return (    
-    <View style={styles.wrapper}>
+    <Pressable style={styles.wrapper} onPress={() => router.push(url)}>
         <Text style={styles.text}>{text}</Text>
-    </View>
+    </Pressable>
   )
 }
 

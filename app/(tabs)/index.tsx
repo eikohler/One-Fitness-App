@@ -62,7 +62,7 @@ export default function Routines() {
           <RoutinesList />
 
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <Button text={'Add Routine'} />
+            <Button text={'Add Routine'} url={"/add-routine"} />
           </View>
 
         </View>

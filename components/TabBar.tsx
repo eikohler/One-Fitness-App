@@ -26,7 +26,7 @@ const TabBar = ({ state, descriptors, navigation }: any) => {
                                 ? options.title
                                 : route.name;
 
-                    if (route.name.includes(hiddenTabs)) return null;
+                    if (hiddenTabs.some(str => route.name.includes(str))) return null;
 
                     const isFocused = state.index === index;
 
@@ -60,7 +60,8 @@ const TabBar = ({ state, descriptors, navigation }: any) => {
                             style={styles.tab}
                             key={`tab-${index}`}
                         >
-                            {icons[route.name]({ color: isFocused ? colors.primaryText : colors.secondaryText })}
+                            {icons[route.name] && 
+                            icons[route.name]({ color: isFocused ? colors.primaryText : colors.secondaryText })}
                             <Text style={[styles.label, { color: isFocused ? colors.primaryText : colors.secondaryText }]}>
                                 {label}
                             </Text>
