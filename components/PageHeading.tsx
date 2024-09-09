@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     title: {
       color: colors.primaryText,
       fontWeight: "700",
-      letterSpacing: 1.5,    
+      letterSpacing: 1,    
     },
     list: {
       color: colors.primaryText,
