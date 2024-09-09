@@ -20,7 +20,7 @@ const RoutinesList = () => {
 
     // addRoutine(db, { title: "Workout Routine 1.0", last_note: "Need better form" });
 
-    // deleteRoutine(db, "1");
+    // deleteRoutine(db, "4");
 
     getRoutines(db)
       .then((res)=>{ if(res) setRoutines(res); })

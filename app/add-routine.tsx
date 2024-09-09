@@ -2,9 +2,9 @@ import { View, StatusBar, Text, Pressable, StyleSheet, TextInput, Keyboard, Touc
 import { mainStyles } from '@/constants/Styles';
 import Button from '@/components/Button';
 import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
-import { initDB } from '@/utilities/db-functions';
+import { addRoutine, initDB } from '@/utilities/db-functions';
 import { colors } from '@/constants/Colors';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
 
 const AddOptions = () => {
@@ -14,8 +14,9 @@ const AddOptions = () => {
     const [notes, setNotes] = useState<string>();
 
     const saveRoutine = () => {
-        // addRoutine(db, { title: title, last_note: "" });
-        console.log('Test Save');
+        addRoutine(db, { title: title ? title : "", last_note: notes ? notes : "" })
+            .then(()=>router.push('/'))
+            .catch((err)=>console.log(err));
     }
 
 
