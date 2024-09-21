@@ -1,30 +1,32 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@/constants/Colors';
-import Ionicons from '@expo/vector-icons/Ionicons';
 
-const PageHeading = ({title, list = []}: {title: string, list?: string[]}) => {
+const PageHeading = ({title, list, children}: {
+  title: string, 
+  list?: string[],
+  children?: JSX.Element
+}) => {
 
   return (
-    <View style={styles.container}>
+    <View style={{marginBottom: 30}}>
         <View style={styles.row}>
             <View>
                 <Text style={[styles.title, {fontSize: title.length > 15 ? 22 : 30}]}>
                     {title}
                 </Text>                                      
             </View>
-            <Ionicons name="ellipsis-horizontal" size={40} color={colors.primaryText} />
+
+            {children}
         </View>
-        {list.map((text, index) =>
+        {list?.map((text, index) =>
             <Text style={styles.list} key={`headingList-${index}`}>{text}</Text>
         )}
     </View>
   )
+
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginBottom: 30
-    },
     row: {
       display: "flex",
       justifyContent: "space-between",

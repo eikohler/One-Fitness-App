@@ -10,4 +10,7 @@ export const mainStyles = StyleSheet.create({
       width: "90%",
       marginHorizontal: "auto"
     },
+    scrollList: {
+      paddingBottom: 30
+    }
 });
