@@ -4,7 +4,7 @@ import { colors } from './Colors';
 export const mainStyles = StyleSheet.create({
     container: {        
       backgroundColor: colors.mainBG,
-      flex: 1
+      height: "100%"
     },
     wrapper: {
       width: "90%",

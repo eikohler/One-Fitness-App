@@ -1,4 +1,4 @@
-import { View, StatusBar, Text, ScrollView, Pressable } from 'react-native';
+import { View, StatusBar, ScrollView, Text } from 'react-native';
 import { mainStyles } from '@/constants/Styles';
 import Button from '@/components/Button';
 import SlimList from "@/components/SlimList";
@@ -8,8 +8,6 @@ import { initDB, getRoutines, addRoutine, deleteRoutine } from '@/utilities/db-f
 import { ListData, Routine } from '@/constants/Interfaces';
 import { Href } from 'expo-router';
 import PageHeading from '@/components/PageHeading';
-import SettingsButton from '@/components/SettingsButton';
-import OptionsOverlay from '@/components/OptionsOverlay';
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
 
@@ -33,7 +31,11 @@ const RoutinesList = () => {
     let newListData: ListData[] = [];
 
     routines.map((obj) => {
-      newListData.push({ title: obj.title, info: ["ID:" + obj.routine_id, obj.last_note], url: `/routines/${obj.routine_id}` as Href });
+      newListData.push({ 
+        title: obj.title, 
+        info: ["ID:" + obj.routine_id, obj.last_note], 
+        url: `/routines/${obj.routine_id}` as Href 
+      });
     });
 
     setListData(newListData);
@@ -47,7 +49,9 @@ const RoutinesList = () => {
           <Button text={'Add Routine'} url={"/add-routine"} />
         </View>
       ) : (
-        <SlimList data={listData} />
+        <>
+          <SlimList data={listData} />
+        </>
       )}
     </ScrollView>
   );
