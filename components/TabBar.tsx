@@ -1,82 +1,54 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { colors } from '@/constants/Colors';
+import { Href, router } from 'expo-router';
 
-const TabBar = ({ state, descriptors, navigation }: any) => {
+export default function TabBar({ active }: { active?: string }) {
 
-    const icons:any = {
-        'index': (props: any) => <MaterialCommunityIcons name="calendar-text" size={30} color={colors.secondaryText} {...props} />,
-        'workouts': (props: any) => <MaterialCommunityIcons name="clipboard-list" size={30} color={colors.secondaryText} {...props} />,
-        'exercises': (props: any) => <MaterialCommunityIcons name="weight-lifter" size={30} color={colors.secondaryText} {...props} />
-    }
-
-    const hiddenTabs = [
-        '(pages)'
-    ];
+    const tabs: { title: string, icon: any, link: Href }[] = [
+        {
+            title: 'Routines',
+            icon: "calendar-text",
+            link: "/"
+        },
+        {
+            title: 'Workouts',
+            icon: "clipboard-list",
+            link: "/workouts"
+        },
+        {
+            title: 'Exercises',
+            icon: "weight-lifter",
+            link: '/exercises'
+        }
+    ]
 
     return (
-        <View style={styles.container}>
-            <View style={styles.wrapper}>
-                {state.routes.map((route: any, index: any) => {
-                    const { options } = descriptors[route.key];
-                    const label =
-                        options.tabBarLabel !== undefined
-                            ? options.tabBarLabel
-                            : options.title !== undefined
-                                ? options.title
-                                : route.name;
+        <View style={styles.wrapper}>
 
-                    if (hiddenTabs.some(str => route.name.includes(str))) return null;
+            {tabs.map((obj, i) => (
 
-                    const isFocused = state.index === index;
+                <TouchableOpacity
+                    accessibilityRole="button"
+                    onPress={() => router.push(obj.link)}
+                    style={styles.tab}
+                    key={`tab-${i}`}
+                >
+                    <MaterialCommunityIcons name={obj.icon} size={30} 
+                    color={active == obj.title ? colors.primaryText : colors.secondaryText} />
+                    <Text style={[styles.label, { color: active == obj.title ? colors.primaryText : colors.secondaryText }]}>
+                        {obj.title}
+                    </Text>
+                </TouchableOpacity>
 
-                    const onPress = () => {
-                        const event = navigation.emit({
-                            type: 'tabPress',
-                            target: route.key,
-                            canPreventDefault: true,
-                        });
+            ))}
 
-                        if (!isFocused && !event.defaultPrevented) {
-                            navigation.navigate(route.name, route.params);
-                        }
-                    };
 
-                    const onLongPress = () => {
-                        navigation.emit({
-                            type: 'tabLongPress',
-                            target: route.key,
-                        });
-                    };
-
-                    return (
-                        <TouchableOpacity
-                            accessibilityRole="button"
-                            accessibilityState={isFocused ? { selected: true } : {}}
-                            accessibilityLabel={options.tabBarAccessibilityLabel}
-                            testID={options.tabBarTestID}
-                            onPress={onPress}
-                            onLongPress={onLongPress}
-                            style={styles.tab}
-                            key={`tab-${index}`}
-                        >
-                            {icons[route.name] && 
-                            icons[route.name]({ color: isFocused ? colors.primaryText : colors.secondaryText })}
-                            <Text style={[styles.label, { color: isFocused ? colors.primaryText : colors.secondaryText }]}>
-                                {label}
-                            </Text>
-                        </TouchableOpacity>
-                    );
-                })}
-            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.mainBG,
-    },
     wrapper: {
         backgroundColor: colors.tabBG,
         borderTopLeftRadius: 30,
@@ -87,7 +59,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal: 20,
         paddingBottom: 40,
-        paddingTop: 20
+        paddingTop: 20,
+        position: "absolute",
+        bottom: 0,
+        zIndex: 9
     },
     tab: {
         flex: 1,
@@ -101,5 +76,3 @@ const styles = StyleSheet.create({
         fontSize: 12
     }
 });
-
-export default TabBar

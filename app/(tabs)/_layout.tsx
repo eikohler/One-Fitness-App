@@ -1,10 +1,9 @@
 import {Tabs} from "expo-router";
-import TabBar from "@/components/TabBar";
 import Header from "@/components/Header";
 
 const TabsLayout = () => {
   return (
-    <Tabs tabBar={props=><TabBar {...props} />}>
+    <Tabs>
       <Tabs.Screen name="index" options={{ title: "routines", header: (props) => <Header {...props} /> }} />
       <Tabs.Screen name="workouts" options={{ header: (props) => <Header {...props} /> }} />
       <Tabs.Screen name="exercises" options={{ header: (props) => <Header {...props} /> }} />

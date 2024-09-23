@@ -6,6 +6,7 @@ import { addRoutine, initDB } from '@/utilities/db-functions';
 import { colors } from '@/constants/Colors';
 import { Link, router } from 'expo-router';
 import { useState } from 'react';
+import Header from '@/components/Header';
 
 const AddOptions = () => {
     const db = useSQLiteContext();
@@ -15,8 +16,8 @@ const AddOptions = () => {
 
     const saveRoutine = () => {
         addRoutine(db, { title: title ? title : "", last_note: notes ? notes : "" })
-            .then(()=>router.push('/'))
-            .catch((err)=>console.log(err));
+            .then(() => router.push('/'))
+            .catch((err) => console.log(err));
     }
 
 
@@ -53,9 +54,14 @@ export default function AddRoutine() {
 
     return (
         <SQLiteProvider databaseName="fitness.db" onInit={initDB}>
+
+
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+
                 <View style={mainStyles.container}>
-                    <StatusBar barStyle="light-content" />
+
+                    <Header />
+
                     <View style={mainStyles.wrapper}>
 
                         <AddOptions />
@@ -66,7 +72,10 @@ export default function AddRoutine() {
 
                     </View>
                 </View>
+
             </TouchableWithoutFeedback>
+
+            <StatusBar barStyle="light-content" />
         </SQLiteProvider>
     );
 }
@@ -75,12 +84,13 @@ const styles = StyleSheet.create({
     optionButtonsWrapper: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginVertical: 20
+        marginTop: 10,
+        marginBottom: 20
     },
     optionButtons: {
         color: colors.primaryText,
         textTransform: "uppercase",
-        fontSize: 18,
+        fontSize: 20,
         letterSpacing: 1
     },
     input: {

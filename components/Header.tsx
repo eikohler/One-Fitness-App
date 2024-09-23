@@ -1,30 +1,18 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { View, Text, StyleSheet } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router } from 'expo-router';
 import { colors } from '@/constants/Colors';
 
-const Header = ({backTitle = ""}: any) => {
+export default function Header() {
 
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.row}>
-
-          {
-            backTitle 
-            ? (<Pressable style={styles.textIconWrapper} onPress={()=>router.back()}>
-                <Ionicons name="chevron-back-sharp" size={15} color="#6363FF" />
-                <Text style={styles.backText}>{backTitle}</Text>
-              </Pressable>) 
-            : (<Text style={styles.text}>ONE</Text>)
-          }
-
+          <Text style={styles.text}>ONE</Text>
           <View style={styles.textIconWrapper}>
             <Text style={styles.text}>WEEK    10</Text>
-            <MaterialIcons name="bolt" style={{marginLeft: -1}} size={15} color="#6363FF" />
+            <MaterialIcons name="bolt" style={{marginLeft: -1}} size={15} color={colors.headerText} />
           </View>
-
         </View>
       </View>
     </View>    
@@ -33,8 +21,9 @@ const Header = ({backTitle = ""}: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.mainBG,
-    paddingBottom: 20
+    paddingBottom: 20,
+    position: "relative",
+    zIndex: 99
   },
   wrapper: {
     width: "90%",
@@ -68,5 +57,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 });
-
-export default Header;
