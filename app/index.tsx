@@ -21,6 +21,7 @@ const RoutinesList = () => {
   useEffect(() => {
 
     // addRoutine(db, { title: "Workout Routine 1.0", last_note: "Need better form" });    
+    // deleteRoutine(db, "5");
 
     getRoutines(db)
       .then((res) => { if (res) setRoutines(res); })
@@ -43,16 +44,18 @@ const RoutinesList = () => {
   }, [routines]);
 
   return (
-    <ScrollView style={mainStyles.container}>
-      {routines.length === 0 ? (
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Button text={'Add Routine'} url={"/add-routine"} />
-        </View>
-      ) : (
-        <>
-          <SlimList data={listData} />
-        </>
-      )}
+    <ScrollView>
+      <View style={mainStyles.wrapper}>
+        {routines.length === 0 ? (
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <Button text={'Create Routine'} url={"/add-routine"} />
+          </View>
+        ) : (
+          <>
+            <SlimList data={listData} />            
+          </>
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -69,11 +72,7 @@ export default function Routines() {
         <PageHeading title={'Routines'} 
         settings={[{ title: "Add Routine", link: "/add-routine" }]} />
 
-        <View style={mainStyles.wrapper}>
-
-          <RoutinesList />
-
-        </View>
+        <RoutinesList />
 
       </View>
 

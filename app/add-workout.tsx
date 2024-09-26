@@ -15,15 +15,11 @@ const AddOptions = () => {
     const [notes, setNotes] = useState<string>();
 
     const saveRoutine = () => {
-        console.log(title, notes);
-
         addRoutine(db, { title: title ? title : "", last_note: notes ? notes : "" })
-            .then((res) => {
-                console.log(res);
-                router.push('/');
-            })
+            .then(() => router.push('/'))
             .catch((err) => console.log(err));
     }
+
 
     return (
         <>
@@ -38,7 +34,7 @@ const AddOptions = () => {
                 style={styles.input}
                 onChangeText={setTitle}
                 value={title}
-                placeholder="Routine Name"
+                placeholder="Workout Name"
             />
 
             <TextInput
@@ -54,10 +50,11 @@ const AddOptions = () => {
     )
 }
 
-export default function AddRoutine() {
+export default function AddWorkout() {
 
     return (
         <SQLiteProvider databaseName="fitness.db" onInit={initDB}>
+
 
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -70,7 +67,7 @@ export default function AddRoutine() {
                         <AddOptions />
 
                         <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                            <Button text={'Add Workout'} url={"/add-workout"} />
+                            <Button text={'Add Exercise'} url={"/add-routine"} />
                         </View>
 
                     </View>

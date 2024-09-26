@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { colors } from '@/constants/Colors';
-import { Href, Link } from 'expo-router';
+import { Href, router } from 'expo-router';
 import { BlurView } from 'expo-blur';
 import SettingsButton from './SettingsButton';
 import { useState } from 'react';
@@ -25,7 +25,9 @@ const PageHeading = ({ title, list, settings }: {
           </Pressable>
 
           {settings?.map((obj, i) =>
-            <Link href={obj.link} key={"option" + i} style={styles.options}>{obj.title}</Link>
+            <Pressable key={"option" + i} onPress={() => router.push(obj.link)}>
+              <Text style={styles.options}>{obj.title}</Text>
+            </Pressable>
           )}
         </View>
       </BlurView>

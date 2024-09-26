@@ -81,7 +81,7 @@ export const getRoutines = async (db: SQLiteDatabase) : Promise<Routine[] | unde
 export const addRoutine = async (db: SQLiteDatabase, newRoutine: { title: string; last_note: string; }) => {
     try {
         const query = await db.prepareAsync(`INSERT INTO routines (title, last_note) VALUES (?, ?)`);
-        await query.executeAsync(newRoutine.title, newRoutine.last_note);
+        return await query.executeAsync(newRoutine.title, newRoutine.last_note);        
     } catch (err) {
         console.log("Error while adding routine: ", err);
     }
