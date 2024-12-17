@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { colors } from '@/constants/Colors';
 
-export default function Header() {
+export default function Header(props:any) {
 
   return (
     <View style={styles.container}>

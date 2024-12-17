@@ -38,9 +38,7 @@ export default function Routines() {
   }
 
   return (
-      <View style={mainStyles.container}>
-
-        <Header />        
+      <View style={mainStyles.container}>      
 
         {routine && (<>
           <PageHeading title={routine.title} isFocused={isFocused}

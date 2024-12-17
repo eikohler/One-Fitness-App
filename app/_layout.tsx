@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import { colors } from "@/constants/Colors";
 import { initDB } from "@/utilities/db-functions";
 import {Stack} from "expo-router";
@@ -11,7 +12,7 @@ const RootLayout = () => {
       <Stack screenOptions={{contentStyle: { backgroundColor: colors.mainBG }}}>
           <Stack.Screen name="(modals)/create-routine" options={{ presentation: 'modal', headerShown: false }} />
           <Stack.Screen name="(modals)/edit-routine/[id]" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />          
+          <Stack.Screen name="(tabs)" options={{header: props=><Header {...props}/>}} />          
       </Stack>
     </SQLiteProvider>
   );
