@@ -1,17 +1,11 @@
-import {Tabs} from "expo-router";
-import Header from "@/components/Header";
+import TabBar from '@/components/TabBar';
+import { Tabs } from 'expo-router';
 
-const TabsLayout = () => {
+export default function TabLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen name="index" options={{ title: "routines", header: (props) => <Header {...props} /> }} />
-      <Tabs.Screen name="workouts" options={{ header: (props) => <Header {...props} /> }} />
-      <Tabs.Screen name="exercises" options={{ header: (props) => <Header {...props} /> }} />
-      <Tabs.Screen name="(pages)/routines/[id]" options={{ header: (props) => <Header {...props} /> }} />
-      <Tabs.Screen name="(pages)/workouts/[id]" options={{ header: (props) => <Header {...props} /> }} />
-      <Tabs.Screen name="(pages)/exercises/[id]" options={{ header: (props) => <Header {...props} /> }} />
+    <Tabs screenOptions={{animation: "shift"}} tabBar={props=><TabBar {...props} />}>
+        <Tabs.Screen name="index" options={{ headerShown: false }} />
+        <Tabs.Screen name="routines/[id]" options={{ headerShown: false }} />
     </Tabs>
   );
 }
-
-export default TabsLayout;

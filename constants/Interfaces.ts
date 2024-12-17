@@ -12,6 +12,10 @@ export interface Routine{
     last_note: string
 }
 
+export interface Count{
+    count: number
+}
+
 export interface Workout{
     workout_id: number
     title: string

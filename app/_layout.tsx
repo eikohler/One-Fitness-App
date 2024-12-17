@@ -1,13 +1,19 @@
+import { colors } from "@/constants/Colors";
+import { initDB } from "@/utilities/db-functions";
 import {Stack} from "expo-router";
+import { SQLiteProvider } from "expo-sqlite";
+import { StatusBar } from "react-native";
 
 const RootLayout = () => {
   return (
-    <Stack>
-        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="add-routine" options={{ headerShown: false }} />
-        <Stack.Screen name="add-workout" options={{ headerShown: false }} />
-    </Stack>
+    <SQLiteProvider databaseName="fitness.db" onInit={initDB}>
+      <StatusBar barStyle="light-content" />
+      <Stack screenOptions={{contentStyle: { backgroundColor: colors.mainBG }}}>
+          <Stack.Screen name="(modals)/create-routine" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="(modals)/edit-routine/[id]" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />          
+      </Stack>
+    </SQLiteProvider>
   );
 }
 

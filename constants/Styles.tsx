@@ -5,7 +5,7 @@ export const mainStyles = StyleSheet.create({
     container: {        
       backgroundColor: colors.mainBG,
       height: "100%",
-      paddingBottom: 100
+      paddingBottom: 100,
     },
     wrapper: {
       width: "90%",

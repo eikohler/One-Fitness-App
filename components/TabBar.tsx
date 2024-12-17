@@ -3,23 +3,29 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { colors } from '@/constants/Colors';
 import { Href, router } from 'expo-router';
 
-export default function TabBar({ active }: { active?: string }) {
+export default function TabBar(props:any) {
 
-    const tabs: { title: string, icon: any, link: Href }[] = [
+    const active = props.navigation.getState().index;
+    console.log("Active Page Index: ", active);
+
+    const tabs: { title: string, icon: any, link: Href, actives: number[] }[] = [
         {
             title: 'Routines',
             icon: "calendar-text",
-            link: "/"
+            link: "/",
+            actives: [0, 1]
         },
         {
             title: 'Workouts',
             icon: "clipboard-list",
-            link: "/workouts"
+            link: "/",
+            actives: []
         },
         {
             title: 'Exercises',
             icon: "weight-lifter",
-            link: '/exercises'
+            link: "/",
+            actives: []
         }
     ]
 
@@ -30,13 +36,13 @@ export default function TabBar({ active }: { active?: string }) {
 
                 <TouchableOpacity
                     accessibilityRole="button"
-                    onPress={() => router.push(obj.link)}
+                    onPress={() => router.replace(obj.link)}
                     style={styles.tab}
                     key={`tab-${i}`}
                 >
                     <MaterialCommunityIcons name={obj.icon} size={30} 
-                    color={active == obj.title ? colors.primaryText : colors.secondaryText} />
-                    <Text style={[styles.label, { color: active == obj.title ? colors.primaryText : colors.secondaryText }]}>
+                    color={obj.actives.includes(active) ? colors.primaryText : colors.secondaryText} />
+                    <Text style={[styles.label, { color: obj.actives.includes(active) ? colors.primaryText : colors.secondaryText }]}>
                         {obj.title}
                     </Text>
                 </TouchableOpacity>
